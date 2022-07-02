@@ -31,6 +31,7 @@ public class Course {
             students = new ArrayList<>();
         }
         students.add(student);
+        student.addCourse(this);
     }
 
     public int getId() {

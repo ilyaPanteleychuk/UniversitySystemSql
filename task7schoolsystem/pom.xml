@@ -21,6 +21,7 @@
         <mockitoCorePlugin>4.5.1</mockitoCorePlugin>
         <jacocoPlugin>0.8.4</jacocoPlugin>
         <postgreSQLDriver>42.4.0</postgreSQLDriver>
+        <junitVintage>5.8.2</junitVintage>
     </properties>
 
     <dependencies>
@@ -31,6 +32,14 @@
             <version>${junitJupiterVersion}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junitVintage}</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>org.mockito</groupId>
@@ -106,25 +115,6 @@
                     <propertyFile>src/main/resources/db/liquibase.properties</propertyFile>
                     <changeLogFile>src/main/resources/db/changelog/changelog-master.xml</changeLogFile>
                 </configuration>
-<!--                <configuration>-->
-<!--                    <propertyFile>src/main/resources/db/liquibase.properties</propertyFile>-->
-<!--                    <propertyFileWillOverride>true</propertyFileWillOverride>-->
-<!--                    <changeLogFile>src/main/resources/db/changelog/changelog-master.xml</changeLogFile>-->
-<!--&lt;!&ndash;                    <driver>org.postgresql.Driver</driver>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <url>&ndash;&gt;-->
-<!--&lt;!&ndash;                        jdbc:postgresql://localhost:5432/postgres?createDatabaseIfNotExist=true&ndash;&gt;-->
-<!--&lt;!&ndash;                    </url>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <username>postgres</username>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <password>1234</password>&ndash;&gt;-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>process-resources</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>update</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

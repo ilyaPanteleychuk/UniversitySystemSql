@@ -16,6 +16,19 @@ public class Student {
     public Student() {
     }
 
+    public Student(int id, Group group, String firstName, String lastName) {
+        this.id = id;
+        this.group = group;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Student(Group group, String firstName, String lastName) {
+        this.group = group;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;

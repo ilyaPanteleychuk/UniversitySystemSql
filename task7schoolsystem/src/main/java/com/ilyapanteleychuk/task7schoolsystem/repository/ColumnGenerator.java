@@ -10,7 +10,7 @@ public interface ColumnGenerator {
 
     List<Student> setCoursesToStudents(List<Student> students, List<Course> courses);
 
-    List<Student> setStudentsToGroup(List<Group> groups);
+    List<Student> setStudentsToGroup(List<Student> students, List<Group> groups);
 
     List<Student> generateRandomStudents();
 

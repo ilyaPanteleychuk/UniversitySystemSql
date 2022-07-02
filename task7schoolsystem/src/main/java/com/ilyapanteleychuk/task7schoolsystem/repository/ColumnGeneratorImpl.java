@@ -4,7 +4,12 @@ import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Student;
 import org.apache.commons.lang.RandomStringUtils;
-import java.util.*;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 
 public class ColumnGeneratorImpl implements ColumnGenerator {
@@ -35,10 +40,10 @@ public class ColumnGeneratorImpl implements ColumnGenerator {
     }
 
     @Override
-    public List<Student> setStudentsToGroup(List<Group> groups) {
-        List<Student> students = new ArrayList<>();
+    public List<Student> setStudentsToGroup(List<Student> students, List<Group> groups) {
+        List<Student> studentList = new ArrayList<>();
         List<Group> copyOfGroups = new ArrayList<>(groups);
-        List<Student> copyOfStudents = generateRandomStudents();
+        List<Student> copyOfStudents = new ArrayList<>(students);
         for (int i = 0; i < 10; i++) {
             Group randomGroup = null;
             if(!copyOfGroups.isEmpty()) {
@@ -51,12 +56,12 @@ public class ColumnGeneratorImpl implements ColumnGenerator {
                         copyOfStudents.get(random.nextInt(copyOfStudents.size()));
                     student.setGroup(randomGroup);
                     copyOfStudents.remove(student);
-                    students.add(student);
+                    studentList.add(student);
                 }
             }
             copyOfGroups.remove(randomGroup);
         }
-        return students;
+        return studentList;
     }
 
     @Override
@@ -65,23 +70,19 @@ public class ColumnGeneratorImpl implements ColumnGenerator {
         List<String> firstNames = Arrays.asList("Abdul", "Murat", "Henry",
             "Vasiliy", "Ricardo", "Federucho", "Adolf", "Benjamin", "Eva",
             "Elena", "Michail", "Roman", "Ilya", "Anastasia", "Alexey",
-            "Alexandr", "Alena", "Rosa", "Dmitriy");
+            "Alexandr", "Alena", "Rosa", "Dmitriy", "Galina");
         List<String> lastNames = Arrays.asList("Panteleychuk", "Butevich",
             "Smith", "Doe", "Winchester", "Morningstar", "Evans", "Hemsword",
             "Depp", "Decker", "Rebbit", "Ivanov", "Sidorov", "Stark",
             "Barateon", "Greyjoy", "Targarian", "Kupina", "Samodelova",
             "Amber");
-        for (int i = 0; i < 200; i++) {
+        while(students.size() != 200){
             Student student = new Student(firstNames.get(random.nextInt(firstNames.size())),
                 lastNames.get(random.nextInt(lastNames.size())));
             if (!(students.contains(student))) {
+                student.setId(students.size() + 1);
                 students.add(student);
-            }else{
-                i--;
             }
-        }
-        for(int i = 0; i < 200; i++){
-            students.get(i).setId(i + 1);
         }
         return students;
     }
