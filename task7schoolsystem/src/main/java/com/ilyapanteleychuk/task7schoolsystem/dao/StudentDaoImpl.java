@@ -12,17 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StudentDaoImpl implements StudentDao {
+public class StudentDaoImpl {
 
-    private final GroupDao groupDao;
     private final ConnectionProvider connectionProvider;
+    private final GroupDaoImpl groupDao;
 
-    public StudentDaoImpl(GroupDao groupDao, ConnectionProvider connectionProvider) {
-        this.groupDao = groupDao;
+    public StudentDaoImpl(ConnectionProvider connectionProvider, GroupDaoImpl groupDao) {
         this.connectionProvider = connectionProvider;
+        this.groupDao = groupDao;
     }
 
-    @Override
     public void addNewStudent(Student student) {
         try {
             Connection connection = connectionProvider.getConnection();
@@ -38,7 +37,6 @@ public class StudentDaoImpl implements StudentDao {
         }
     }
 
-    @Override
     public List<Integer> getAllStudentsByCourseName(Course course) {
         List<Integer> studentsId = new ArrayList<>();
         try {
@@ -56,7 +54,6 @@ public class StudentDaoImpl implements StudentDao {
         return studentsId;
     }
 
-    @Override
     public void deleteStudentById(int id) {
         try {
             Connection connection = connectionProvider.getConnection();
@@ -67,10 +64,8 @@ public class StudentDaoImpl implements StudentDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    @Override
     public Student getStudentById(int id) {
         Student student = null;
         try {

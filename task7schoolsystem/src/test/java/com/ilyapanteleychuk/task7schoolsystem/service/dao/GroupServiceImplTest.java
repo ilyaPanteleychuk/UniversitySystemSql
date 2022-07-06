@@ -1,12 +1,10 @@
 package com.ilyapanteleychuk.task7schoolsystem.service.dao;
 
-import com.ilyapanteleychuk.task7schoolsystem.dao.GroupDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 
 class GroupServiceImplTest {

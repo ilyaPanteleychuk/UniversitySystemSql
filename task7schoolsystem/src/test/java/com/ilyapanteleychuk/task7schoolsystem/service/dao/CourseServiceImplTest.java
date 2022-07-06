@@ -1,6 +1,5 @@
 package com.ilyapanteleychuk.task7schoolsystem.service.dao;
 
-import com.ilyapanteleychuk.task7schoolsystem.dao.CourseDao;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 
 class CourseServiceImplTest {

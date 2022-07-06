@@ -9,15 +9,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public class DataBaseFacadeImpl implements DataBaseFacade {
+public class DbInserter {
 
     private final ConnectionProvider connectionProvider;
 
-    public DataBaseFacadeImpl(ConnectionProvider connectionProvider) {
+    public DbInserter(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
 
-    @Override
     public void fillStudentsTable(List<Student> students) {
         try {
             Connection connection = connectionProvider.getConnection();
@@ -35,7 +34,6 @@ public class DataBaseFacadeImpl implements DataBaseFacade {
         }
     }
 
-    @Override
     public void fillGroupsTable(List<Group> groups) {
         try {
             Connection connection = connectionProvider.getConnection();
@@ -51,7 +49,6 @@ public class DataBaseFacadeImpl implements DataBaseFacade {
         }
     }
 
-    @Override
     public void fillCoursesTable(List<Course> courses) {
         try {
             Connection connection = connectionProvider.getConnection();
@@ -68,17 +65,16 @@ public class DataBaseFacadeImpl implements DataBaseFacade {
         }
     }
 
-    @Override
     public void fillJointStudentsCoursesTable(List<Student> students) {
         try {
             Connection connection = connectionProvider.getConnection();
             String query = "insert into university" +
-                ".students_courses(student_id, course_id) values (?,?)";
+                ".students_courses(student_id, course_id) values (?,?) " +
+                "ON CONFLICT (student_id, course_id) DO NOTHING";
             for (Student student : students) {
                 for (Course course : student.getCourses()) {
                     PreparedStatement pr = connection
-                        .prepareStatement
-                            (query);
+                        .prepareStatement(query);
                     pr.setInt(1, student.getId());
                     pr.setInt(2, course.getId());
                     pr.executeUpdate();

@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 
-class DataBaseFacadeImplTest {
+class DbInserterTest {
 
     private ConnectionProvider providerMock;
     private Connection connectionMock;
@@ -36,7 +36,7 @@ class DataBaseFacadeImplTest {
         try {
             when(providerMock.getConnection()).thenReturn(connectionMock);
             when(connectionMock.prepareStatement(any(String.class))).thenReturn(statementMock);
-            DataBaseFacade dataBaseFacade = new DataBaseFacadeImpl(providerMock);
+            DataBaseFacade dataBaseFacade = new DbInserter(providerMock);
             List<Student> studentList = new ArrayList<>();
             studentList.add(new Student(new Group(2, "xx-12"),
                 "Jake", "Sally"));
@@ -59,7 +59,7 @@ class DataBaseFacadeImplTest {
         try {
             when(providerMock.getConnection()).thenReturn(connectionMock);
             when(connectionMock.prepareStatement(any(String.class))).thenReturn(statementMock);
-            DataBaseFacade dataBaseFacade = new DataBaseFacadeImpl(providerMock);
+            DataBaseFacade dataBaseFacade = new DbInserter(providerMock);
             List<Group> groups = new ArrayList<>();
             groups.add(new Group(1, "xx-00"));
             dataBaseFacade.fillGroupsTable(groups);
@@ -80,7 +80,7 @@ class DataBaseFacadeImplTest {
             when(providerMock.getConnection()).thenReturn(connectionMock);
             when(connectionMock.prepareStatement(any(String.class)))
                 .thenReturn(statementMock);
-            DataBaseFacade dataBaseFacade = new DataBaseFacadeImpl(providerMock);
+            DataBaseFacade dataBaseFacade = new DbInserter(providerMock);
             List<Course> courses = new ArrayList<>();
             Course course = new Course("Math", "MathStudying");
             courses.add(course);
@@ -102,7 +102,7 @@ class DataBaseFacadeImplTest {
             when(providerMock.getConnection()).thenReturn(connectionMock);
             when(connectionMock.prepareStatement(any(String.class)))
                 .thenReturn(statementMock);
-            DataBaseFacade dataBaseFacade = new DataBaseFacadeImpl(providerMock);
+            DataBaseFacade dataBaseFacade = new DbInserter(providerMock);
             List<Student> students = new ArrayList<>();
             students.add(new Student(1, new Group(1, "pp-12"),
                 "John", "Doe"));

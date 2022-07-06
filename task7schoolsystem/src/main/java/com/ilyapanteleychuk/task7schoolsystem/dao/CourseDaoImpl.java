@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseDaoImpl implements CourseDao{
+public class CourseDaoImpl {
 
     private final ConnectionProvider connectionProvider;
 
@@ -19,7 +19,6 @@ public class CourseDaoImpl implements CourseDao{
         this.connectionProvider = connectionProvider;
     }
 
-    @Override
     public List<Course> getAllCourses() {
         List<Course> allCourses = new ArrayList<>();
         try {
@@ -39,7 +38,6 @@ public class CourseDaoImpl implements CourseDao{
         return allCourses;
     }
 
-    @Override
     public Course getCourseByName(String name) {
         Course course = null;
         try {
@@ -60,7 +58,6 @@ public class CourseDaoImpl implements CourseDao{
         return course;
     }
 
-    @Override
     public void addStudentToCourse(int studentId, int courseId) {
         try {
             Connection connection = connectionProvider.getConnection();
@@ -75,22 +72,20 @@ public class CourseDaoImpl implements CourseDao{
         }
     }
 
-    @Override
-    public void removeStudentFromCourse(int studentId, Course course) {
+    public void removeStudentFromCourse(int studentId, int courseId) {
         try {
             Connection connection = connectionProvider.getConnection();
             String query = "DELETE FROM university.students_courses " +
                 "where student_id = ? and course_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, studentId);
-            statement.setInt(2, course.getId());
+            statement.setInt(2, courseId);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Override
     public Course getCourseById(int courseId) {
         Course course = null;
         try {
@@ -111,7 +106,6 @@ public class CourseDaoImpl implements CourseDao{
         return course;
     }
 
-    @Override
     public List<Integer> getAllStudentCourses(int studentId) {
         List<Integer> studentCourses = new ArrayList<>();
         try {

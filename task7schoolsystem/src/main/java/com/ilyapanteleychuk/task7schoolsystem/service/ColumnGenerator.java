@@ -1,4 +1,4 @@
-package com.ilyapanteleychuk.task7schoolsystem.repository;
+package com.ilyapanteleychuk.task7schoolsystem.service;
 
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
@@ -12,11 +12,10 @@ import java.util.List;
 import java.util.Random;
 
 
-public class ColumnGeneratorImpl implements ColumnGenerator {
+public class ColumnGenerator {
 
     private static final Random random = new Random();
 
-    @Override
     public List<Student> setCoursesToStudents(List<Student> students, List<Course> courses){
         int randomAmountOfCourses = random.nextInt(4);
         if(randomAmountOfCourses == 0){
@@ -39,7 +38,6 @@ public class ColumnGeneratorImpl implements ColumnGenerator {
         return students;
     }
 
-    @Override
     public List<Student> setStudentsToGroup(List<Student> students, List<Group> groups) {
         List<Student> studentList = new ArrayList<>();
         List<Group> copyOfGroups = new ArrayList<>(groups);
@@ -64,7 +62,6 @@ public class ColumnGeneratorImpl implements ColumnGenerator {
         return studentList;
     }
 
-    @Override
     public List<Student> generateRandomStudents() {
         List<Student> students = new ArrayList<>();
         List<String> firstNames = Arrays.asList("Abdul", "Murat", "Henry",
@@ -87,7 +84,6 @@ public class ColumnGeneratorImpl implements ColumnGenerator {
         return students;
     }
 
-    @Override
     public List<Group> generateRandomGroups() {
         Set<Group> groups = new HashSet<>();
         for (int i = 0; i < 10; i++) {
@@ -100,7 +96,6 @@ public class ColumnGeneratorImpl implements ColumnGenerator {
         return new ArrayList<>(groups);
     }
 
-    @Override
     public List<Course> generateCourses() {
         List<Course> courses = new ArrayList<>();
         courses.add(new Course(1,"Math", "MathStudying"));

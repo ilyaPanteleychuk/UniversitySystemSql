@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Student {
+public class Student implements Entity {
 
     private int id;
     private Group group;

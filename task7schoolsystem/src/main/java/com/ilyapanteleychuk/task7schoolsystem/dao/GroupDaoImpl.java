@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GroupDaoImpl implements GroupDao{
+public class GroupDaoImpl {
 
     private final ConnectionProvider connectionProvider;
 
@@ -18,7 +18,6 @@ public class GroupDaoImpl implements GroupDao{
         this.connectionProvider = connectionProvider;
     }
 
-    @Override
     public Group getGroupById(int id) {
         Group group = null;
         try {
@@ -38,7 +37,6 @@ public class GroupDaoImpl implements GroupDao{
         return group;
     }
 
-    @Override
     public List<Integer> findAllGroupWithLessOrEqualsStudentCount(int count) {
         List<Integer> groupsId = new ArrayList<>();
         try {

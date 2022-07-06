@@ -1,7 +1,5 @@
 package com.ilyapanteleychuk.task7schoolsystem.service.repository;
 
-import com.ilyapanteleychuk.task7schoolsystem.repository.ColumnGenerator;
-import com.ilyapanteleychuk.task7schoolsystem.repository.DataBaseFacade;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -9,7 +7,6 @@ import java.util.ArrayList;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 
 class DataBaseServiceImplTest {
