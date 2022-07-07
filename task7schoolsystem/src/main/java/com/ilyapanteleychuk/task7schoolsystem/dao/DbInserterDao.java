@@ -20,7 +20,7 @@ public class DbInserterDao {
     public void fillStudentsTable(List<Student> students) {
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "insert into university" +
+            final String query = "insert into university" +
                 ".students(group_id, first_name, last_name) values (?,?,?)";
             for (Student student : students) {
                 PreparedStatement pr = connection.prepareStatement(query);
@@ -37,7 +37,7 @@ public class DbInserterDao {
     public void fillGroupsTable(List<Group> groups) {
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "insert into university.groups(group_name) values(?)";
+            final String query = "insert into university.groups(group_name) values(?)";
             for (Group group : groups) {
                 PreparedStatement pr = connection.prepareStatement(query);
                 pr.setInt(1, group.getId());
@@ -52,7 +52,7 @@ public class DbInserterDao {
     public void fillCoursesTable(List<Course> courses) {
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "insert into university" +
+            final String query = "insert into university" +
                 ".courses(course_name, course_description) values(?,?)";
             for (Course course : courses) {
                 PreparedStatement pr = connection.prepareStatement(query);
@@ -68,7 +68,7 @@ public class DbInserterDao {
     public void fillJointStudentsCoursesTable(List<Student> students) {
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "insert into university" +
+            final String query = "insert into university" +
                 ".students_courses(student_id, course_id) values (?,?) " +
                 "ON CONFLICT (student_id, course_id) DO NOTHING";
             for (Student student : students) {

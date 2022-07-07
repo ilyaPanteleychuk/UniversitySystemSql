@@ -21,7 +21,7 @@ public class StudentDao {
     public void addNewStudent(Student student) {
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "insert into university." +
+            final String query = "insert into university." +
                 "students(group_id, first_name, last_name) values (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, student.getGroup().getId());
@@ -37,7 +37,8 @@ public class StudentDao {
         List<Integer> studentsId = new ArrayList<>();
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "select * from university.students_courses where course_id = ?";
+            final String query =
+                "select * from university.students_courses where course_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, course.getId());
             ResultSet resultSet = statement.executeQuery();
@@ -53,7 +54,8 @@ public class StudentDao {
     public void deleteStudentById(int id) {
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "delete from university.students where student_id = ?";
+            final String query =
+                "delete from university.students where student_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             statement.executeUpdate();
@@ -66,7 +68,7 @@ public class StudentDao {
         Student student = null;
         try {
             Connection connection = connectionProvider.getConnection();
-            String query =
+            final String query =
                 "select * from university.students where student_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);

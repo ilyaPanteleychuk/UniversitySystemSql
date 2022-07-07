@@ -21,7 +21,8 @@ public class GroupDao {
         Group group = null;
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "select * from university.groups where group_id = ?";
+            final String query =
+                "select * from university.groups where group_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -40,7 +41,7 @@ public class GroupDao {
         int groupId = 0;
         try {
             Connection connection = connectionProvider.getConnection();
-            String query =
+            final String query =
                 "select group_id from university.students where student_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, studentId);
@@ -57,7 +58,7 @@ public class GroupDao {
         List<Integer> groupsId = new ArrayList<>();
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "select group_id as ln " +
+            final String query = "select group_id as ln " +
                 "FROM(SELECT group_id, count(*) as Counter " +
                 "FROM university.students GROUP BY group_id) " +
                 "as group_id where Counter <= ?";

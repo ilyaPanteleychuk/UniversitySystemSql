@@ -22,7 +22,7 @@ public class CourseDao {
         List<Course> allCourses = new ArrayList<>();
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "select * from university.courses";
+            final String query = "select * from university.courses";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
@@ -41,7 +41,8 @@ public class CourseDao {
         Course course = null;
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "select * from university.courses where course_name = ?";
+            final String query =
+                "select * from university.courses where course_name = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, StringUtils.capitalize(name));
             ResultSet resultSet = statement.executeQuery();
@@ -60,7 +61,7 @@ public class CourseDao {
     public void addStudentToCourse(int studentId, int courseId) {
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "insert into university." +
+            final String query = "insert into university." +
                 "students_courses(student_id, course_id) values (?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, studentId);
@@ -74,8 +75,8 @@ public class CourseDao {
     public void removeStudentFromCourse(int studentId, int courseId) {
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "DELETE FROM university.students_courses " +
-                "where student_id = ? and course_id = ?";
+            final String query = "DELETE FROM university.students_courses " +
+                    "where student_id = ? and course_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
@@ -89,7 +90,8 @@ public class CourseDao {
         Course course = null;
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "SELECT * FROM university.courses where course_id = ?;";
+            final String query =
+                "SELECT * FROM university.courses where course_id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, courseId);
             ResultSet resultSet = statement.executeQuery();
@@ -109,7 +111,8 @@ public class CourseDao {
         List<Integer> studentCourses = new ArrayList<>();
         try {
             Connection connection = connectionProvider.getConnection();
-            String query = "SELECT * FROM university.students_courses where student_id = ?;";
+            final String query =
+                "SELECT * FROM university.students_courses where student_id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, studentId);
             ResultSet resultSet = statement.executeQuery();

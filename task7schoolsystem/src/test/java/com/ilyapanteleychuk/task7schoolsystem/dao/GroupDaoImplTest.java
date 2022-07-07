@@ -1,18 +1,7 @@
 package com.ilyapanteleychuk.task7schoolsystem.dao;
 
-import com.ilyapanteleychuk.task7schoolsystem.repository.ConnectionProvider;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 
 class GroupDaoImplTest {
