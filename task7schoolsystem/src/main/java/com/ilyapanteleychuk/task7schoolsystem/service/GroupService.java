@@ -1,6 +1,6 @@
-package com.ilyapanteleychuk.task7schoolsystem.service.dao;
+package com.ilyapanteleychuk.task7schoolsystem.service;
 
-import com.ilyapanteleychuk.task7schoolsystem.dao.GroupDaoImpl;
+import com.ilyapanteleychuk.task7schoolsystem.dao.GroupDao;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 public class GroupService {
 
-    private final GroupDaoImpl groupDao;
+    private final GroupDao groupDao;
 
-    public GroupService(GroupDaoImpl groupDao) {
+    public GroupService(GroupDao groupDao) {
         this.groupDao = groupDao;
     }
 
@@ -22,5 +22,9 @@ public class GroupService {
 
     public Group getGroupById(int groupId){
         return groupDao.getGroupById(groupId);
+    }
+
+    public int getGroupOfStudent(int studentId){
+        return groupDao.getGroupOfStudent(studentId);
     }
 }

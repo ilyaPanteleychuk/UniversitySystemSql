@@ -23,12 +23,6 @@ public class Student implements Entity {
         this.lastName = lastName;
     }
 
-    public Student(Group group, String firstName, String lastName) {
-        this.group = group;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -78,10 +72,9 @@ public class Student implements Entity {
     public String toString() {
         return "Student{" +
             "id=" + id +
-            ", groupId=" + group +
+            ", group=" + group +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
-            ", courses=" + courses +
             '}';
     }
 

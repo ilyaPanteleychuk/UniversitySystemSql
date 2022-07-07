@@ -1,6 +1,6 @@
-package com.ilyapanteleychuk.task7schoolsystem.service.dao;
+package com.ilyapanteleychuk.task7schoolsystem.service;
 
-import com.ilyapanteleychuk.task7schoolsystem.dao.CourseDaoImpl;
+import com.ilyapanteleychuk.task7schoolsystem.dao.CourseDao;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 public class CourseService {
 
-    private final CourseDaoImpl courseDao;
+    private final CourseDao courseDao;
 
-    public CourseService(CourseDaoImpl courseDao) {
+    public CourseService(CourseDao courseDao) {
         this.courseDao = courseDao;
     }
 
@@ -27,8 +27,8 @@ public class CourseService {
     }
 
     public List<Course> getAllStudentCourses(int studentId) {
-        List<Integer> integers = courseDao.getAllStudentCourses(studentId);
-        return integers.stream().map(courseDao::getCourseById)
+        List<Integer> studentsId = courseDao.getAllStudentCourses(studentId);
+        return studentsId.stream().map(courseDao::getCourseById)
             .collect(Collectors.toList());
     }
 }

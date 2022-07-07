@@ -1,7 +1,6 @@
 package com.ilyapanteleychuk.task7schoolsystem.dao;
 
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
-import com.ilyapanteleychuk.task7schoolsystem.repository.ConnectionProvider;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GroupDaoImpl {
+public class GroupDao {
 
     private final ConnectionProvider connectionProvider;
 
-    public GroupDaoImpl(ConnectionProvider connectionProvider) {
+    public GroupDao(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
 
@@ -37,6 +36,23 @@ public class GroupDaoImpl {
         return group;
     }
 
+    public int getGroupOfStudent(int studentId){
+        int groupId = 0;
+        try {
+            Connection connection = connectionProvider.getConnection();
+            String query =
+                "select group_id from university.students where student_id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, studentId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                groupId= resultSet.getInt("group_id");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return groupId;
+    }
     public List<Integer> findAllGroupWithLessOrEqualsStudentCount(int count) {
         List<Integer> groupsId = new ArrayList<>();
         try {

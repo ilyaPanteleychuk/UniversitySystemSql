@@ -1,4 +1,4 @@
-package com.ilyapanteleychuk.task7schoolsystem.repository;
+package com.ilyapanteleychuk.task7schoolsystem.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

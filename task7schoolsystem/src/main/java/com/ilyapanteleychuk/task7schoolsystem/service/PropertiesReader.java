@@ -1,4 +1,4 @@
-package com.ilyapanteleychuk.task7schoolsystem;
+package com.ilyapanteleychuk.task7schoolsystem.service;
 
 import java.io.IOException;
 import java.io.InputStream;

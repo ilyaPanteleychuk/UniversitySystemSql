@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Random;
 
 
-public class ColumnGenerator {
+public class RandomInitialDataGenerator {
 
     private static final Random random = new Random();
 
-    public List<Student> setCoursesToStudents(List<Student> students, List<Course> courses){
+    public List<Student> assignStudentsToCourses(List<Student> students, List<Course> courses){
         int randomAmountOfCourses = random.nextInt(4);
         if(randomAmountOfCourses == 0){
             randomAmountOfCourses++;
@@ -38,7 +38,7 @@ public class ColumnGenerator {
         return students;
     }
 
-    public List<Student> setStudentsToGroup(List<Student> students, List<Group> groups) {
+    public List<Student> assignStudentsToGroups(List<Student> students, List<Group> groups) {
         List<Student> studentList = new ArrayList<>();
         List<Group> copyOfGroups = new ArrayList<>(groups);
         List<Student> copyOfStudents = new ArrayList<>(students);

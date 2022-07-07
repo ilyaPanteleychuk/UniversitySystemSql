@@ -1,7 +1,6 @@
 package com.ilyapanteleychuk.task7schoolsystem.dao;
 
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
-import com.ilyapanteleychuk.task7schoolsystem.repository.ConnectionProvider;
 import org.apache.commons.lang.StringUtils;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -11,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseDaoImpl {
+public class CourseDao {
 
     private final ConnectionProvider connectionProvider;
 
-    public CourseDaoImpl(ConnectionProvider connectionProvider) {
+    public CourseDao(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
 

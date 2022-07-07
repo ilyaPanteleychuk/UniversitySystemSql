@@ -1,9 +1,7 @@
 package com.ilyapanteleychuk.task7schoolsystem.dao;
 
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
-import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Student;
-import com.ilyapanteleychuk.task7schoolsystem.repository.ConnectionProvider;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,14 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StudentDaoImpl {
+public class StudentDao {
 
     private final ConnectionProvider connectionProvider;
-    private final GroupDaoImpl groupDao;
 
-    public StudentDaoImpl(ConnectionProvider connectionProvider, GroupDaoImpl groupDao) {
+    public StudentDao(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
-        this.groupDao = groupDao;
     }
 
     public void addNewStudent(Student student) {
@@ -77,11 +73,10 @@ public class StudentDaoImpl {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 int studentId = resultSet.getInt("student_id");
-                int groupId = resultSet.getInt("group_id");
-                Group group = groupDao.getGroupById(groupId);
                 String firstName = resultSet.getString("first_name");
                 String secondName = resultSet.getString("last_name");
-                student = new Student(studentId, group, firstName, secondName);
+                student = new Student(firstName, secondName);
+                student.setId(studentId);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

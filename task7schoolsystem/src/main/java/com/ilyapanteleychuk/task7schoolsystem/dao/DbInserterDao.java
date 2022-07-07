@@ -1,4 +1,4 @@
-package com.ilyapanteleychuk.task7schoolsystem.repository;
+package com.ilyapanteleychuk.task7schoolsystem.dao;
 
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public class DbInserter {
+public class DbInserterDao {
 
     private final ConnectionProvider connectionProvider;
 
-    public DbInserter(ConnectionProvider connectionProvider) {
+    public DbInserterDao(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
     }
 
@@ -73,8 +73,7 @@ public class DbInserter {
                 "ON CONFLICT (student_id, course_id) DO NOTHING";
             for (Student student : students) {
                 for (Course course : student.getCourses()) {
-                    PreparedStatement pr = connection
-                        .prepareStatement(query);
+                    PreparedStatement pr = connection.prepareStatement(query);
                     pr.setInt(1, student.getId());
                     pr.setInt(2, course.getId());
                     pr.executeUpdate();
