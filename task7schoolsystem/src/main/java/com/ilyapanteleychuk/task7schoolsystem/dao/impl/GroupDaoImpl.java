@@ -1,5 +1,9 @@
-package com.ilyapanteleychuk.task7schoolsystem.dao;
+package com.ilyapanteleychuk.task7schoolsystem.dao.impl;
 
+import com.ilyapanteleychuk.task7schoolsystem.dao.CommonDao;
+import com.ilyapanteleychuk.task7schoolsystem.dao.db.ConnectionProvider;
+import com.ilyapanteleychuk.task7schoolsystem.dao.GroupDao;
+import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -27,6 +31,26 @@ public class GroupDaoImpl implements CommonDao<Group>, GroupDao {
             statement.setInt(1, group.getId());
             statement.setString(2, group.getName());
             statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void addAll(List<Group> groupList) {
+        try {
+            Connection connection = connectionProvider.getConnection();
+            connection.setAutoCommit(false);
+            final String query = "insert into university." +
+                "students(group_id, group_name) values (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            for(Group group: groupList) {
+                statement.setInt(1, group.getId());
+                statement.setString(2, group.getName());
+                statement.addBatch();
+            }
+            statement.executeBatch();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

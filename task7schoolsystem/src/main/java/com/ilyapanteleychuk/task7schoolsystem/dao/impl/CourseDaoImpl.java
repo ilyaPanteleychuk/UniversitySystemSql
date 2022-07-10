@@ -1,5 +1,8 @@
-package com.ilyapanteleychuk.task7schoolsystem.dao;
+package com.ilyapanteleychuk.task7schoolsystem.dao.impl;
 
+import com.ilyapanteleychuk.task7schoolsystem.dao.CommonDao;
+import com.ilyapanteleychuk.task7schoolsystem.dao.db.ConnectionProvider;
+import com.ilyapanteleychuk.task7schoolsystem.dao.CourseDao;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import org.apache.commons.lang.StringUtils;
 import java.sql.ResultSet;
@@ -32,7 +35,7 @@ public class CourseDaoImpl implements CommonDao<Course>, CourseDao {
                 int courseId = resultSet.getInt("course_id");
                 String name = resultSet.getString("course_name");
                 String description = resultSet.getString("course_description");
-                course = new Course(id, name, description);
+                course = new Course(courseId, name, description);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -83,8 +86,29 @@ public class CourseDaoImpl implements CommonDao<Course>, CourseDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, course.getId());
             statement.setString(2, course.getName());
-            statement.setString(2, course.getDescription());
+            statement.setString(3, course.getDescription());
             statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void addAll(List<Course> courseList) {
+        try {
+            Connection connection = connectionProvider.getConnection();
+            connection.setAutoCommit(false);
+            final String query = "insert into university." +
+                "students(course_id, course_name, course_description) values (?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            for(Course course : courseList) {
+                statement.setInt(1, course.getId());
+                statement.setString(2, course.getName());
+                statement.setString(3, course.getDescription());
+                statement.addBatch();
+            }
+            statement.executeBatch();
+            connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -100,7 +124,7 @@ public class CourseDaoImpl implements CommonDao<Course>, CourseDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, StringUtils.capitalize(name));
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()) {
+            if(resultSet.next()) {
                 int id = resultSet.getInt("course_id");
                 String courseName = resultSet.getString("course_name");
                 String courseDescription = resultSet.getString("course_description");
@@ -140,27 +164,6 @@ public class CourseDaoImpl implements CommonDao<Course>, CourseDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public Course getCourseById(int courseId) {
-        Course course = null;
-        try {
-            Connection connection = connectionProvider.getConnection();
-            final String query =
-                "SELECT * FROM university.courses where course_id = ?;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, courseId);
-            ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()){
-                int id = resultSet.getInt("course_id");
-                String name = resultSet.getString("course_name");
-                String description = resultSet.getString("course_description");
-                course = new Course(id, name, description);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return course;
     }
 
     @Override

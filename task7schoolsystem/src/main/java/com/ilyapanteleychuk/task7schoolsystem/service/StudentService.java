@@ -2,7 +2,6 @@ package com.ilyapanteleychuk.task7schoolsystem.service;
 
 import com.ilyapanteleychuk.task7schoolsystem.dao.CommonDao;
 import com.ilyapanteleychuk.task7schoolsystem.dao.StudentDao;
-import com.ilyapanteleychuk.task7schoolsystem.dao.StudentDaoImpl;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Student;
@@ -56,6 +55,10 @@ public class StudentService {
         Student student = new Student(firstName, lastName);
         student.setGroup(group);
         commonStudentDao.add(student);
+    }
+
+    public void addAllStudents(List<Student> studentList){
+        commonStudentDao.addAll(studentList);
     }
 
     public List<Student> getAllStudentsByCourseName(String courseName) {

@@ -23,7 +23,7 @@ public class ApplicationUserMenu {
         this.studentService = studentService;
     }
 
-    public void startApp() {
+    public void startMenu() {
         Scanner scanner = new Scanner(System.in);
         do {
             printOptions();

@@ -24,9 +24,9 @@ public class DbInserterService {
         students = randomInitialDataGenerator.assignStudentsToGroups(students, groups);
         List<Course> courses = randomInitialDataGenerator.generateCourses();
         students = randomInitialDataGenerator.assignStudentsToCourses(students, courses);
-        dbInserterDao.fillCoursesTable(courses);
-        dbInserterDao.fillGroupsTable(groups);
-        dbInserterDao.fillStudentsTable(students);
-        dbInserterDao.fillJointStudentsCoursesTable(students);
+        dbInserterDao.addAllCourses(courses);
+        dbInserterDao.addAllGroups(groups);
+        dbInserterDao.addAllStudents(students);
+        dbInserterDao.addAllCoursesStudents(students);
     }
 }

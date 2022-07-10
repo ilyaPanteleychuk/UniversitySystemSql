@@ -13,4 +13,6 @@ public interface CommonDao<T extends Entity> {
     void deleteById(int id);
 
     void add(T t);
+
+    void addAll(List<T> t);
 }

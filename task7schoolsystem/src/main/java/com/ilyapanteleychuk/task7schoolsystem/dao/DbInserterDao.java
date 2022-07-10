@@ -1,5 +1,6 @@
 package com.ilyapanteleychuk.task7schoolsystem.dao;
 
+import com.ilyapanteleychuk.task7schoolsystem.dao.db.ConnectionProvider;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Student;
@@ -17,7 +18,7 @@ public class DbInserterDao {
         this.connectionProvider = connectionProvider;
     }
 
-    public void fillStudentsTable(List<Student> students) {
+    public void addAllStudents(List<Student> students) {
         try {
             Connection connection = connectionProvider.getConnection();
             final String query = "insert into university" +
@@ -34,7 +35,7 @@ public class DbInserterDao {
         }
     }
 
-    public void fillGroupsTable(List<Group> groups) {
+    public void addAllGroups(List<Group> groups) {
         try {
             Connection connection = connectionProvider.getConnection();
             final String query = "insert into university.groups(group_name) values(?)";
@@ -49,7 +50,7 @@ public class DbInserterDao {
         }
     }
 
-    public void fillCoursesTable(List<Course> courses) {
+    public void addAllCourses(List<Course> courses) {
         try {
             Connection connection = connectionProvider.getConnection();
             final String query = "insert into university" +
@@ -65,7 +66,7 @@ public class DbInserterDao {
         }
     }
 
-    public void fillJointStudentsCoursesTable(List<Student> students) {
+    public void addAllCoursesStudents(List<Student> students) {
         try {
             Connection connection = connectionProvider.getConnection();
             final String query = "insert into university" +
