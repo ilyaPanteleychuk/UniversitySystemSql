@@ -34,6 +34,7 @@ class StudentServiceTest {
         studentService = new StudentService(commonStudentDao, studentDao,
             courseService, groupService);
     }
+
     @Test
     void getStudentById() {
         Student studentMock = Mockito.mock(Student.class);

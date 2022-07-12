@@ -25,6 +25,7 @@ public class ApplicationUserMenu {
 
     public void startMenu() {
         Scanner scanner = new Scanner(System.in);
+        char decision;
         do {
             printOptions();
             int choice = scanner.nextInt();
@@ -41,7 +42,9 @@ public class ApplicationUserMenu {
                     break;
                 }
             }
-        } while (true);
+            System.out.println("go on? y - yes, n - no");
+            decision = scanner.next().charAt(0);
+        } while (decision == 'y');
     }
 
     private void printOptions() {
@@ -60,6 +63,7 @@ public class ApplicationUserMenu {
         String firstName = scanner.nextLine();
         System.out.println("Write student secondName(in double quotes)");
         String secondName = scanner.nextLine();
+        scanner.nextLine();
         System.out.println("Would you like to assign group for student" +
             " (1 - yes, 0 - no");
         int groupChoice = scanner.nextInt();

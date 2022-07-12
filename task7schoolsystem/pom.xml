@@ -40,7 +40,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -120,6 +119,24 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*com/ilyapanteleychuk/task7schoolsystem/entity/Course.class</exclude>
+                        <exclude>**/*com/ilyapanteleychuk/task7schoolsystem/entity/Group.class</exclude>
+                        <exclude>**/*com/ilyapanteleychuk/task7schoolsystem/entity/Student.class</exclude>
+                    </excludes>
+                    <rules>
+                        <rule>
+                            <limits>
+                                <limit>
+                                    <counter>LINE</counter>
+                                    <value>COVEREDRATIO</value>
+                                    <minimum>0.8</minimum>
+                                </limit>
+                            </limits>
+                        </rule>
+                    </rules>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -134,10 +151,10 @@
                         </goals>
                         <!-- default target/jscoco/site/* -->
                         <configuration>
-                            <outputDirectory>target/jacoco-report
-                            </outputDirectory>
+                            <outputDirectory>target/jacoco-report</outputDirectory>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
             <plugin>
