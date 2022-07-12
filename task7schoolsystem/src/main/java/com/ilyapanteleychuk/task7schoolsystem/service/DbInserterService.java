@@ -1,20 +1,30 @@
 package com.ilyapanteleychuk.task7schoolsystem.service;
 
+import com.ilyapanteleychuk.task7schoolsystem.dao.*;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
 import com.ilyapanteleychuk.task7schoolsystem.entity.Student;
-import com.ilyapanteleychuk.task7schoolsystem.dao.DbInserterDao;
+
 import java.util.List;
 
 
 public class DbInserterService {
 
-    private final DbInserterDao dbInserterDao;
+    private final CommonDao<Course> courseCommonDao;
+    private final CommonDao<Group> groupCommonDao;
+    private final CommonDao<Student> studentCommonDao;
+    private final StudentDao studentDao;
     private final RandomInitialDataGenerator randomInitialDataGenerator;
 
-    public DbInserterService(DbInserterDao dbInserterDao,
+    public DbInserterService(CommonDao<Course> courseCommonDao,
+                             CommonDao<Group> groupCommonDao,
+                             CommonDao<Student> studentCommonDao,
+                             StudentDao studentDao,
                              RandomInitialDataGenerator randomInitialDataGenerator) {
-        this.dbInserterDao = dbInserterDao;
+        this.courseCommonDao = courseCommonDao;
+        this.groupCommonDao = groupCommonDao;
+        this.studentCommonDao = studentCommonDao;
+        this.studentDao = studentDao;
         this.randomInitialDataGenerator = randomInitialDataGenerator;
     }
 
@@ -24,9 +34,9 @@ public class DbInserterService {
         students = randomInitialDataGenerator.assignStudentsToGroups(students, groups);
         List<Course> courses = randomInitialDataGenerator.generateCourses();
         students = randomInitialDataGenerator.assignStudentsToCourses(students, courses);
-        dbInserterDao.addAllCourses(courses);
-        dbInserterDao.addAllGroups(groups);
-        dbInserterDao.addAllStudents(students);
-        dbInserterDao.addAllCoursesStudents(students);
+        courseCommonDao.addAll(courses);
+        groupCommonDao.addAll(groups);
+        studentCommonDao.addAll(students);
+        studentDao.addAllCoursesStudents(students);
     }
 }

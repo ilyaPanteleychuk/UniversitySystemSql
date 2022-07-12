@@ -1,6 +1,10 @@
 package com.ilyapanteleychuk.task7schoolsystem.service;
 
-import com.ilyapanteleychuk.task7schoolsystem.dao.DbInserterDao;
+import com.ilyapanteleychuk.task7schoolsystem.dao.CommonDao;
+import com.ilyapanteleychuk.task7schoolsystem.dao.StudentDao;
+import com.ilyapanteleychuk.task7schoolsystem.entity.Course;
+import com.ilyapanteleychuk.task7schoolsystem.entity.Group;
+import com.ilyapanteleychuk.task7schoolsystem.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import java.util.ArrayList;
@@ -11,11 +15,18 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 class DbInserterServiceTest {
 
-    private final DbInserterDao dbInserterDaoMock = Mockito.mock(DbInserterDao.class);
+    private final CommonDao<Course> courseCommonDaoMock =
+        (CommonDao<Course>) Mockito.mock(CommonDao.class);
+    private final CommonDao<Group> groupCommonDaoMock =
+        (CommonDao<Group>) Mockito.mock(CommonDao.class);
+    private final CommonDao<Student> studentCommonDao =
+        (CommonDao<Student>) Mockito.mock(CommonDao.class);
+    private final StudentDao studentDaoMock = Mockito.mock(StudentDao.class);
     private final RandomInitialDataGenerator dataGeneratorMock =
         Mockito.mock(RandomInitialDataGenerator.class);
     private final DbInserterService dbInserterService =
-        new DbInserterService(dbInserterDaoMock, dataGeneratorMock);
+        new DbInserterService(courseCommonDaoMock, groupCommonDaoMock,
+            studentCommonDao, studentDaoMock, dataGeneratorMock);
 
     @Test
     void fillTables() {
@@ -30,15 +41,18 @@ class DbInserterServiceTest {
             .assignStudentsToCourses(new ArrayList<>(), new ArrayList<>());
         verify(dataGeneratorMock, times(1))
             .assignStudentsToGroups(new ArrayList<>(), new ArrayList<>());
-        verify(dbInserterDaoMock, times(1))
-            .addAllCourses(new ArrayList<>());
-        verify(dbInserterDaoMock, times(1))
-            .addAllGroups(new ArrayList<>());
-        verify(dbInserterDaoMock, times(1))
-            .addAllStudents(new ArrayList<>());
-        verify(dbInserterDaoMock, times(1))
+        verify(courseCommonDaoMock, times(1))
+            .addAll(new ArrayList<>());
+        verify(groupCommonDaoMock, times(1))
+            .addAll(new ArrayList<>());
+        verify(studentCommonDao, times(1))
+            .addAll(new ArrayList<>());
+        verify(studentDaoMock, times(1))
             .addAllCoursesStudents(new ArrayList<>());
-        verifyNoMoreInteractions(dbInserterDaoMock);
+        verifyNoMoreInteractions(courseCommonDaoMock);
+        verifyNoMoreInteractions(groupCommonDaoMock);
+        verifyNoMoreInteractions(studentCommonDao);
+        verifyNoMoreInteractions(studentDaoMock);
         verifyNoMoreInteractions(dataGeneratorMock);
     }
 }

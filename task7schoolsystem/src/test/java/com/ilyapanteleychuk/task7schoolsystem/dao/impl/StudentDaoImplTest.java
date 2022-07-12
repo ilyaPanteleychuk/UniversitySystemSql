@@ -183,4 +183,31 @@ class StudentDaoImplTest {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    void addAllCoursesStudents(){
+        try {
+            Student studentMock = Mockito.mock(Student.class);
+            List<Student> studentList = List.of(studentMock);
+            Course courseMock = Mockito.mock(Course.class);
+            List<Course> courseList = List.of(courseMock);
+            when(providerMock.getConnection()).thenReturn(connectionMock);
+            when(connectionMock.prepareStatement(any(String.class))).thenReturn(statementMock);
+            when(studentMock.getCourses()).thenReturn(courseList);
+            when(studentMock.getId()).thenReturn(1);
+            when(courseMock.getId()).thenReturn(1);
+            studentDao.addAllCoursesStudents(studentList);
+            verify(studentMock, times(1)).getCourses();
+            verify(studentMock, times(1)).getId();
+            verify(courseMock, times(1)).getId();
+            verify(statementMock, times(1)).setInt(1, 1);
+            verify(statementMock, times(1)).setInt(2, 1);
+            verify(statementMock, times(1)).executeUpdate();
+            verifyNoMoreInteractions(statementMock);
+            verifyNoMoreInteractions(studentMock);
+            verifyNoMoreInteractions(courseMock);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

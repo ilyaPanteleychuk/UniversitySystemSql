@@ -137,4 +137,23 @@ public class StudentDaoImpl implements CommonDao<Student>, StudentDao {
         return studentsId;
     }
 
+    @Override
+    public void addAllCoursesStudents(List<Student> students) {
+        try {
+            Connection connection = connectionProvider.getConnection();
+            final String query = "insert into university" +
+                ".students_courses(student_id, course_id) values (?,?) " +
+                "ON CONFLICT (student_id, course_id) DO NOTHING";
+            for (Student student : students) {
+                for (Course course : student.getCourses()) {
+                    PreparedStatement pr = connection.prepareStatement(query);
+                    pr.setInt(1, student.getId());
+                    pr.setInt(2, course.getId());
+                    pr.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

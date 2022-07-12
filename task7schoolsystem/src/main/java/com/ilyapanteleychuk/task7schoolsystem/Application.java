@@ -15,7 +15,6 @@ import com.ilyapanteleychuk.task7schoolsystem.view.ApplicationUserMenu;
 public class Application {
 
     private final ConnectionProvider connectionProvider;
-    private final DbInserterDao dbInserterDao;
     private final RandomInitialDataGenerator randomInitialDataGenerator;
     DbInserterService dbInserterService;
     private final GroupDao groupDao;
@@ -31,9 +30,7 @@ public class Application {
 
     public Application(ConnectionProvider connectionProvider) {
         this.connectionProvider = connectionProvider;
-        this.dbInserterDao = new DbInserterDao(connectionProvider);
         this.randomInitialDataGenerator = new RandomInitialDataGenerator();
-        this.dbInserterService = new DbInserterService(dbInserterDao, randomInitialDataGenerator);
         this.groupDao = new GroupDaoImpl(connectionProvider);
         this.courseDao = new CourseDaoImpl(connectionProvider);
         this.groupCommonDao = new GroupDaoImpl(connectionProvider);
@@ -42,6 +39,8 @@ public class Application {
         this.courseService = new CourseService(courseCommonDao, courseDao);
         this.studentDao = new StudentDaoImpl(connectionProvider);
         this.studentCommonDao = new StudentDaoImpl(connectionProvider);
+        this.dbInserterService = new DbInserterService(courseCommonDao, groupCommonDao,
+            studentCommonDao, studentDao, randomInitialDataGenerator);
         this.studentService = new StudentService(studentCommonDao, studentDao,
             courseService, groupService);
         this.applicationUserMenu = new ApplicationUserMenu(courseService, groupService, studentService);
