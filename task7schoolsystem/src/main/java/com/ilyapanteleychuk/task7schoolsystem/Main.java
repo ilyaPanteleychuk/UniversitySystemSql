@@ -1,8 +1,7 @@
 package com.ilyapanteleychuk.task7schoolsystem;
 
 import com.ilyapanteleychuk.task7schoolsystem.dao.db.ConnectionProvider;
-import com.ilyapanteleychuk.task7schoolsystem.service.*;
-
+import com.ilyapanteleychuk.task7schoolsystem.service.PropertiesReader;
 
 
 public class Main {

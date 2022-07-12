@@ -4,15 +4,10 @@ import com.ilyapanteleychuk.task7schoolsystem.dao.db.ConnectionProvider;
 import com.ilyapanteleychuk.task7schoolsystem.service.*;
 import com.ilyapanteleychuk.task7schoolsystem.view.ApplicationUserMenu;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Scanner;
-
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 
 class ApplicationTest {

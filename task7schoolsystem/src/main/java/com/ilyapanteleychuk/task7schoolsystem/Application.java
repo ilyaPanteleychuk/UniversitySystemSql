@@ -11,8 +11,6 @@ import com.ilyapanteleychuk.task7schoolsystem.entity.Student;
 import com.ilyapanteleychuk.task7schoolsystem.service.*;
 import com.ilyapanteleychuk.task7schoolsystem.view.ApplicationUserMenu;
 
-import java.util.Scanner;
-
 
 public class Application {
 
